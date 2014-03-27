@@ -12,16 +12,19 @@ import java.net.URL;
 
 import android.os.AsyncTask;
 
-public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
+public class DownloadWebpageTasks extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected String doInBackground(String... urls) {
 		try {
-			return downloadUrl(urls[0]);
+			String result=downloadUrl(urls[0]); 
+			JsonParser checker = new JsonParser();
+			return (checker.verify(result)?"true":"false"); 
 		} catch (IOException e) {
 			return "Unable to retrieve web page. URL may be invalid.";
 		}
 	}
+	
 
 	private String downloadUrl(String myurl) throws IOException {
 		InputStream is = null;

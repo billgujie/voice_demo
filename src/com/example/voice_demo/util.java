@@ -13,16 +13,16 @@ import java.net.URLEncoder;
 public class util {
 	String nextword(String word) {
 		char end = word.charAt(word.length() - 1);
-		String result = "say a place begin with letter ";
+		String result = "begin with letter ";
 		return (result + end);
 	}
 
 	Boolean geocheck(String name) throws IOException {
 		// int len = 2048;
-		String parameters = "&maxRows=1&username=billgujie&style=SHORT&type=json";
+		String parameters = "&maxRows=1&username=billgujie&style=SHORT&type=JSON&&featureClass=P&featureClass=A";
 		name = URLEncoder.encode(name);
 		String urlString = "http://api.geonames.org/search?";
-		urlString = urlString + "name_equals" + name + parameters;
+		urlString = urlString + "name_equals=" + name + parameters;
 		String buf = null;
 
 		URL url = new URL(urlString);

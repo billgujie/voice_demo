@@ -33,7 +33,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
-import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -106,7 +105,7 @@ public class VoiceActivity extends Activity implements OnInitListener {
 		});
 	}
 
-	@SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	private void newGeoCheck(String word) {
 
 		if (!first_time) {
@@ -123,7 +122,7 @@ public class VoiceActivity extends Activity implements OnInitListener {
 					urlString = urlString + "name_equals="
 							+ URLEncoder.encode(word, "UTF-8") + parameters;
 				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
+					//
 					e.printStackTrace();
 				}
 				new DownloadWebpageTask().execute(urlString);
@@ -136,7 +135,7 @@ public class VoiceActivity extends Activity implements OnInitListener {
 				urlString = urlString + "name_equals=" + URLEncoder.encode(word,"UTF-8")
 						+ parameters;
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			new DownloadWebpageTask().execute(urlString);
@@ -149,7 +148,7 @@ public class VoiceActivity extends Activity implements OnInitListener {
 
 	private void startVoiceRecognitionActivity() {
 		if (!first_time) {
-			mycounter.pause();
+			//mycounter.pause();
 		}
 		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -162,13 +161,12 @@ public class VoiceActivity extends Activity implements OnInitListener {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (!first_time) {
-			mycounter.start();
+			//mycounter.start();
 		}
 		if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 			matches = data
 					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-			float[] confidence = data
-					.getFloatArrayExtra(RecognizerIntent.EXTRA_CONFIDENCE_SCORES);
+			//float[] confidence = data.getFloatArrayExtra(RecognizerIntent.EXTRA_CONFIDENCE_SCORES);
 			// ArrayList<String> results = new ArrayList<String>();
 			// for (int i = 0; i < matches.size(); i++) {
 			// results.add(matches.get(i) + ": " + confidence[i]);
@@ -304,7 +302,7 @@ public class VoiceActivity extends Activity implements OnInitListener {
 					try {
 						sb.append(URLEncoder.encode(checker.getResult(), "UTF-8"));
 					} catch (UnsupportedEncodingException e) {
-						// TODO Auto-generated catch block
+						// 
 						e.printStackTrace();
 					}
 					sb.append("\" > </iframe>");
@@ -313,9 +311,9 @@ public class VoiceActivity extends Activity implements OnInitListener {
 					util a = new util();
 					String sentence = a.nextword(currentname);
 					first_time = false;
-					mycounter.cancel();
-					mycounter=new CountDownTimerPausable(10000,1000);
-					mycounter.start();
+					//mycounter.cancel();
+					//mycounter=new CountDownTimerPausable(10000,1000);
+					//mycounter.start();
 					speakWords(sentence);
 				} else {
 					Toast.makeText(getApplicationContext(),
@@ -325,7 +323,7 @@ public class VoiceActivity extends Activity implements OnInitListener {
 			} else {
 				Toast.makeText(getApplicationContext(), "not a valid name",
 						Toast.LENGTH_LONG).show();
-				mycounter.start();
+				//mycounter.start();
 			}
 		}
 
